@@ -10,10 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pink: #C2185B;
-      --pink-2: #D81B60;
-      --pink-glow: rgba(194,24,91,0.25);
-      --pink-pale: #FCE4EC;
+      --pink: #C9607E;
+      --pink-2: #D4789A;
+      --pink-glow: rgba(201,96,126,0.22);
+      --pink-pale: #FCEDF3;
       --dark: #0C0C18;
       --dark-2: #161625;
       --gray: #6B7280;
@@ -33,7 +33,7 @@
       padding:.9rem 6%;
       background:rgba(12,12,24,0.92);
       backdrop-filter:blur(20px);
-      border-bottom:1px solid rgba(194,24,91,0.12);
+      border-bottom:1px solid rgba(201,96,126,0.12);
     }
     .nav-logo { font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:800; color:#fff; text-decoration:none; }
     .nav-logo em { color:var(--pink); font-style:normal; }
@@ -54,19 +54,19 @@
     .post-hero::before {
       content:''; position:absolute; top:-120px; right:-80px;
       width:500px; height:500px;
-      background:radial-gradient(circle, rgba(194,24,91,.13), transparent 65%);
+      background:radial-gradient(circle, rgba(201,96,126,.13), transparent 65%);
       border-radius:50%; pointer-events:none;
     }
     .post-hero::after {
       content:''; position:absolute; bottom:-80px; left:10%;
       width:300px; height:300px;
-      background:radial-gradient(circle, rgba(216,27,96,.07), transparent 65%);
+      background:radial-gradient(circle, rgba(212,120,154,.07), transparent 65%);
       border-radius:50%; pointer-events:none;
     }
     .post-hero-inner { position:relative; z-index:1; max-width:760px; }
     .post-cat {
       display:inline-flex; align-items:center; gap:.5rem;
-      background:rgba(194,24,91,.12); border:1px solid rgba(194,24,91,.3);
+      background:rgba(201,96,126,.12); border:1px solid rgba(201,96,126,.3);
       color:#F48FB1; padding:.35rem 1rem; border-radius:50px;
       font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
       margin-bottom:1.5rem;
@@ -131,7 +131,7 @@
       margin:1.25rem 0; border:1px solid var(--border); transition:all .3s;
       font-family:'Inter',sans-serif;
     }
-    .rule-card:hover { border-color:rgba(194,24,91,.3); box-shadow:0 4px 20px rgba(194,24,91,.07); }
+    .rule-card:hover { border-color:rgba(201,96,126,.3); box-shadow:0 4px 20px rgba(201,96,126,.07); }
     .rule-header { display:flex; align-items:center; gap:.85rem; margin-bottom:.75rem; }
     .rule-num {
       width:32px; height:32px; flex-shrink:0;
@@ -166,7 +166,7 @@
     .share-li:hover { background:rgba(10,102,194,.3); }
     .share-tw { background:rgba(29,161,242,.15); color:#7BC8F7; border:1px solid rgba(29,161,242,.3); }
     .share-tw:hover { background:rgba(29,161,242,.3); }
-    .author-card { background:var(--dark-2); border-radius:20px; padding:2rem; display:flex; gap:1.5rem; align-items:flex-start; border:1px solid rgba(194,24,91,.1); }
+    .author-card { background:var(--dark-2); border-radius:20px; padding:2rem; display:flex; gap:1.5rem; align-items:flex-start; border:1px solid rgba(201,96,126,.1); }
     .author-card img { width:70px; height:70px; border-radius:50%; object-fit:cover; border:2px solid var(--pink); flex-shrink:0; }
     .author-card-name { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
     .author-card-bio { font-size:.88rem; color:rgba(255,255,255,.5); line-height:1.65; margin-bottom:.9rem; }
@@ -174,7 +174,7 @@
     .author-card-links a { color:var(--pink); text-decoration:none; font-size:.82rem; font-weight:600; transition:opacity .2s; }
     .author-card-links a:hover { opacity:.7; }
     .more-posts-title { font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:700; color:#fff; margin:3rem 0 1.25rem; }
-    .more-coming { background:var(--dark-2); border-radius:16px; padding:2rem; text-align:center; border:2px dashed rgba(194,24,91,.25); }
+    .more-coming { background:var(--dark-2); border-radius:16px; padding:2rem; text-align:center; border:2px dashed rgba(201,96,126,.25); }
     .more-coming p { color:rgba(255,255,255,.4); font-size:.88rem; }
     .more-coming strong { color:var(--pink); display:block; margin-bottom:.4rem; font-size:.95rem; }
 
@@ -208,7 +208,7 @@
     <p class="post-subtitle" data-k="post.subtitle">The most underrated skill in data science, and the one that has made the biggest difference in my career. After 6 years, here's what I've learned.</p>
     <div class="post-meta">
       <div class="post-author">
-        <img src="https://moongamboa.github.io/lissett-portfolio/profile.jpg" alt="Lissett Gamboa Luna">
+        <img src="../profile.jpg" alt="Lissett Gamboa Luna">
         <div>
           <div class="post-author-name">Lissett Gamboa Luna</div>
           <div class="post-author-role">Data Scientist · Indicia Worldwide, UK (Remote)</div>
@@ -470,7 +470,7 @@
     </div>
 
     <div class="author-card">
-      <img src="https://moongamboa.github.io/lissett-portfolio/profile.jpg" alt="Lissett Gamboa Luna">
+      <img src="../profile.jpg" alt="Lissett Gamboa Luna">
       <div>
         <div class="author-card-name">Lissett Gamboa Luna</div>
         <div class="author-card-bio" data-k="author.bio">Data Scientist & AI Enthusiast with 6+ years turning data into impact across Colombia, Spain, and the UK. I write about data science, AI, automation, and the human side of working with data.</div>

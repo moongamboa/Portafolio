@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI for Productivity: How I Do More Without Burning Out, Lissett Gamboa Luna</title>
+  <meta name="description" content="You don't need to be a data scientist to use AI. Here's how I use it every single day to work smarter, not harder.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #C2185B;
+      --pink-2: #D81B60;
+      --pink-glow: rgba(194,24,91,0.28);
+      --pink-pale: #FCE4EC;
+      --dark: #0C0C18;
+      --dark-2: #161625;
+      --gray: #6B7280;
+      --gray-light: #F5F6FA;
+      --white: #FFFFFF;
+      --text: #1F2937;
+      --border: #E5E7EB;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; color:var(--text); background:var(--white); overflow-x:hidden; }
+
+    /* NAV */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:999;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.9rem 6%;
+      background:rgba(12,12,24,0.92);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(233,30,140,0.12);
+    }
+    .nav-logo { font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:800; color:#fff; text-decoration:none; }
+    .nav-logo em { color:var(--pink); font-style:normal; }
+    .nav-right { display:flex; align-items:center; gap:1.5rem; }
+    .back-link { color:rgba(255,255,255,.65); text-decoration:none; font-size:.85rem; font-weight:500; transition:color .25s; display:flex; align-items:center; gap:.4rem; }
+    .back-link:hover { color:var(--pink); }
+    .lang-btn { background:transparent; border:1.5px solid var(--pink); color:var(--pink); padding:.3rem .85rem; border-radius:20px; cursor:pointer; font-size:.78rem; font-weight:700; font-family:'Inter',sans-serif; transition:all .25s; }
+    .lang-btn:hover { background:var(--pink); color:#fff; }
+
+    /* HERO */
+    .post-hero {
+      background:var(--dark); padding:120px 6% 80px;
+      position:relative; overflow:hidden;
+    }
+    .post-hero::before {
+      content:''; position:absolute; top:-100px; right:-100px;
+      width:500px; height:500px;
+      background:radial-gradient(circle, rgba(233,30,140,.15), transparent 65%);
+      border-radius:50%;
+    }
+    .post-hero::after {
+      content:''; position:absolute; bottom:-80px; left:-80px;
+      width:350px; height:350px;
+      background:radial-gradient(circle, rgba(255,77,170,.08), transparent 65%);
+      border-radius:50%;
+    }
+    .post-hero-inner { position:relative; z-index:1; max-width:760px; }
+    .post-category {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:rgba(233,30,140,.12); border:1px solid rgba(233,30,140,.3);
+      color:#FF8DCB; padding:.35rem 1rem; border-radius:50px;
+      font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      margin-bottom:1.5rem;
+    }
+    .post-title {
+      font-family:'Space Grotesk',sans-serif;
+      font-size:clamp(2rem,5vw,3.4rem); font-weight:800;
+      color:#fff; line-height:1.1; margin-bottom:1.25rem; letter-spacing:-1px;
+    }
+    .post-title .grad {
+      background:linear-gradient(135deg, var(--pink), #FF8DCB);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .post-subtitle { font-size:1.1rem; color:rgba(255,255,255,.55); line-height:1.7; margin-bottom:2rem; max-width:600px; }
+    .post-meta { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    .post-author { display:flex; align-items:center; gap:.75rem; }
+    .post-author img { width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid var(--pink); }
+    .post-author-name { font-size:.85rem; font-weight:600; color:#fff; }
+    .post-author-role { font-size:.75rem; color:rgba(255,255,255,.45); }
+    .post-meta-info { display:flex; gap:1.25rem; }
+    .meta-item { font-size:.78rem; color:rgba(255,255,255,.45); display:flex; align-items:center; gap:.35rem; }
+
+    /* ARTICLE */
+    .article-wrap { max-width:760px; margin:0 auto; padding:4rem 6% 6rem; }
+    .article-body { font-family:'Lora',serif; font-size:1.08rem; line-height:1.9; color:#374151; }
+    .article-body h2 {
+      font-family:'Space Grotesk',sans-serif; font-size:1.6rem; font-weight:800;
+      color:var(--text); margin:3rem 0 1rem; letter-spacing:-.5px;
+    }
+    .article-body h3 {
+      font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:700;
+      color:var(--text); margin:2rem 0 .75rem;
+    }
+    .article-body p { margin-bottom:1.5rem; }
+    .article-body strong { color:var(--text); font-weight:700; }
+    .article-body em { color:var(--gray); }
+
+    .callout {
+      background:var(--pink-pale); border-left:4px solid var(--pink);
+      border-radius:0 12px 12px 0; padding:1.25rem 1.5rem;
+      margin:2rem 0; font-family:'Inter',sans-serif;
+    }
+    .callout-label { font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--pink); margin-bottom:.4rem; }
+    .callout p { font-size:.95rem; color:#5B2B6A; margin:0; line-height:1.65; font-family:'Inter',sans-serif; }
+
+    .tool-card {
+      background:var(--gray-light); border-radius:16px; padding:1.5rem;
+      margin:1.25rem 0; border:1px solid var(--border); transition:all .3s;
+    }
+    .tool-card:hover { border-color:rgba(233,30,140,.3); box-shadow:0 4px 20px rgba(233,30,140,.08); }
+    .tool-header { display:flex; align-items:center; gap:.75rem; margin-bottom:.6rem; }
+    .tool-emoji { font-size:1.5rem; }
+    .tool-name { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text); }
+    .tool-badge { background:var(--pink-pale); color:var(--pink); padding:.18rem .55rem; border-radius:20px; font-size:.7rem; font-weight:700; font-family:'Inter',sans-serif; }
+    .tool-desc { font-size:.9rem; color:var(--gray); line-height:1.65; font-family:'Inter',sans-serif; }
+
+    .steps { list-style:none; counter-reset:steps; margin:1.5rem 0; }
+    .steps li {
+      counter-increment:steps; padding:.9rem 0 .9rem 3.5rem; position:relative;
+      border-bottom:1px solid var(--border); font-family:'Inter',sans-serif;
+      font-size:.95rem; color:#374151; line-height:1.65;
+    }
+    .steps li:last-child { border-bottom:none; }
+    .steps li::before {
+      content:counter(steps); position:absolute; left:0; top:.85rem;
+      width:28px; height:28px; background:linear-gradient(135deg,var(--pink),var(--pink-2));
+      color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:.78rem; font-weight:800; font-family:'Space Grotesk',sans-serif;
+    }
+    .steps li strong { color:var(--text); }
+
+    .divider { width:60px; height:3px; background:linear-gradient(90deg,var(--pink),var(--pink-2)); border-radius:3px; margin:3rem auto; }
+
+    /* SHARE / FOOTER */
+    .post-footer { background:var(--dark); padding:3.5rem 6%; }
+    .post-footer-inner { max-width:760px; margin:0 auto; }
+    .share-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:1rem; }
+    .share-btns { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:3rem; }
+    .share-btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.6rem 1.3rem; border-radius:50px; text-decoration:none;
+      font-size:.82rem; font-weight:700; font-family:'Inter',sans-serif; transition:all .3s;
+    }
+    .share-li { background:rgba(10,102,194,.15); color:#5BA8D4; border:1px solid rgba(10,102,194,.3); }
+    .share-li:hover { background:rgba(10,102,194,.3); }
+    .share-tw { background:rgba(29,161,242,.15); color:#7BC8F7; border:1px solid rgba(29,161,242,.3); }
+    .share-tw:hover { background:rgba(29,161,242,.3); }
+
+    .author-card {
+      background:var(--dark-2); border-radius:20px; padding:2rem;
+      display:flex; gap:1.5rem; align-items:flex-start;
+      border:1px solid rgba(233,30,140,.1);
+    }
+    .author-card img { width:70px; height:70px; border-radius:50%; object-fit:cover; border:2px solid var(--pink); flex-shrink:0; }
+    .author-card-name { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
+    .author-card-bio { font-size:.88rem; color:rgba(255,255,255,.5); line-height:1.65; margin-bottom:.9rem; }
+    .author-card-links { display:flex; gap:.75rem; }
+    .author-card-links a { color:var(--pink); text-decoration:none; font-size:.82rem; font-weight:600; transition:opacity .2s; }
+    .author-card-links a:hover { opacity:.7; }
+
+    .more-posts-title { font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:700; color:#fff; margin:3rem 0 1.25rem; }
+    .more-coming { background:var(--dark-2); border-radius:16px; padding:2rem; text-align:center; border:2px dashed rgba(233,30,140,.25); }
+    .more-coming p { color:rgba(255,255,255,.4); font-size:.88rem; }
+    .more-coming strong { color:var(--pink); display:block; margin-bottom:.4rem; font-size:.95rem; }
+
+    /* READING PROGRESS */
+    .progress-bar { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--pink),var(--pink-2)); z-index:1001; transition:width .1s; }
+
+    /* RESPONSIVE */
+    @media(max-width:680px) {
+      .post-hero { padding:100px 5% 60px; }
+      .article-wrap { padding:3rem 5% 5rem; }
+      .post-footer { padding:3rem 5%; }
+      .author-card { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">LG<em>.</em></a>
+  <div class="nav-right">
+    <a href="../index.html#projects" class="back-link" data-k="nav.back">← Back to site</a>
+    <button class="lang-btn" id="langBtn">ES</button>
+  </div>
+</nav>
+
+<!-- POST HERO -->
+<div class="post-hero">
+  <div class="post-hero-inner">
+    <div class="post-category" data-k="post.cat">✨ Productivity & AI</div>
+    <h1 class="post-title" data-k="post.title">AI for Productivity:<br><span class="grad">Work Smarter, Not Harder</span></h1>
+    <p class="post-subtitle" data-k="post.subtitle">You don't need to be a data scientist to use AI. Here's exactly how I use it every day, and how you can start today.</p>
+    <div class="post-meta">
+      <div class="post-author">
+        <img src="https://moongamboa.github.io/lissett-portfolio/profile.jpg" alt="Lissett Gamboa Luna">
+        <div>
+          <div class="post-author-name">Lissett Gamboa Luna</div>
+          <div class="post-author-role">Data Scientist & AI Enthusiast</div>
+        </div>
+      </div>
+      <div class="post-meta-info">
+        <div class="meta-item">📅 <span data-k="post.date">June 2025</span></div>
+        <div class="meta-item">⏱ <span data-k="post.read">7 min read</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+  <div class="article-body" id="article-en">
+
+    <p>Let me be honest with you. A couple of years ago, I was the person working 10-hour days, drowning in repetitive tasks, and wondering how some people seemed to get twice as much done in half the time. Then AI happened, not dramatically, not overnight, but slowly and practically.</p>
+
+    <p>I'm a data scientist. I work with models, pipelines, and code daily. But the AI tools that changed my <em>life</em> weren't the cutting-edge research papers. They were the simple, accessible ones that anyone can start using today. This post is about those.</p>
+
+    <div class="callout">
+      <div class="callout-label">💡 The Big Idea</div>
+      <p>AI isn't here to replace you. It's here to take the boring parts off your plate so you can focus on what actually matters, the creative, strategic, human stuff.</p>
+    </div>
+
+    <h2>The Shift That Changed Everything</h2>
+
+    <p>I used to spend a lot of time on things that felt productive but weren't really: writing the same type of email over and over, summarizing long reports, searching for how to write a formula I'd written a hundred times before. Small things, but they added up to hours every week.</p>
+
+    <p>The moment I started thinking of AI as a <strong>thinking partner</strong>, not a magic button, everything changed. The key word is "partner." You bring the context, the judgment, and the goal. AI brings the speed, the options, and the drafts. Together, you move faster than either of you could alone.</p>
+
+    <h2>My Daily AI Toolkit</h2>
+
+    <p>Here are the tools I actually use, explained simply:</p>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">🧠</div>
+        <div class="tool-name">Claude / ChatGPT</div>
+        <div class="tool-badge">Daily Driver</div>
+      </div>
+      <div class="tool-desc">My go-to thinking partner. I use it for drafting emails and reports, brainstorming ideas, explaining complex topics simply, reviewing my writing, and answering questions before I go down a rabbit hole of searching.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">⚡</div>
+        <div class="tool-name">n8n</div>
+        <div class="tool-badge">Automation</div>
+      </div>
+      <div class="tool-desc">This is the one that saves me the most hours. n8n lets you connect apps and automate workflows visually, no heavy coding needed. I've automated WhatsApp replies, inventory tracking, and weekly reporting. Once it runs, it runs forever.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">📝</div>
+        <div class="tool-name">Notion AI</div>
+        <div class="tool-badge">Organization</div>
+      </div>
+      <div class="tool-desc">Great for summarizing meeting notes, generating action items from long documents, and filling in templates. I use it to turn messy brain-dumps into structured project plans.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">🎨</div>
+        <div class="tool-name">Midjourney / DALL·E</div>
+        <div class="tool-badge">Creative</div>
+      </div>
+      <div class="tool-desc">For visuals, presentations, and social media graphics. Instead of spending an hour looking for the "right" stock photo, I describe what I want and have something custom in 30 seconds.</div>
+    </div>
+
+    <h2>Real Examples From My Week</h2>
+
+    <p>Let me make this concrete. Here's how AI showed up in my work <em>this week alone</em>:</p>
+
+    <p><strong>Monday:</strong> Had a 45-page supplier report to read before a meeting. I pasted the key sections into Claude and asked: "What are the three most important points and what questions should I ask?" Meeting prep done in 10 minutes instead of an hour.</p>
+
+    <p><strong>Tuesday:</strong> Needed to send a follow-up email to a client but wasn't sure how to phrase some difficult feedback diplomatically. I wrote what I wanted to say roughly, asked Claude to "make this constructive and professional without losing the key message." First draft done, light editing, sent.</p>
+
+    <p><strong>Thursday:</strong> My automated n8n workflow for inventory reports ran on its own, compiled the data, and sent a summary to the team. I did zero work. It just happened.</p>
+
+    <div class="callout">
+      <div class="callout-label">⏱ Time saved estimate</div>
+      <p>Across these three examples alone: roughly 4–5 hours I got back. Every week. That's more than 200 hours per year, time I now spend on deeper work, learning, or just not burning out.</p>
+    </div>
+
+    <h2>How to Start Today (3 Steps)</h2>
+
+    <ol class="steps">
+      <li><strong>Pick one task you repeat every week</strong>, it could be writing a status update, summarizing a document, or searching for something. That's your first target.</li>
+      <li><strong>Try it with a free AI assistant</strong>, Claude or ChatGPT both have free tiers. Don't overthink the prompt. Just talk to it like you'd talk to a smart colleague. Describe what you need and what the context is.</li>
+      <li><strong>Notice what happened</strong>, Was it faster? Did it open up time? Did the output need editing? That feedback loop is how you get better at using AI effectively.</li>
+    </ol>
+
+    <p>That's it. Start with one task. The toolkit grows naturally as you go.</p>
+
+    <h2>What AI Can't Replace</h2>
+
+    <p>I want to be clear about something: AI is a tool, not a replacement for judgment, relationships, or creativity. It gives you options, you choose. It drafts, you decide. It automates the routine, you handle the nuance.</p>
+
+    <p>The people who will thrive in the next decade aren't those who avoid AI or those who blindly trust it. They're the ones who know <strong>when to use it, how to guide it, and when to set it aside</strong>. That skill, knowing where the human judgment is irreplaceable, is more valuable than any tool.</p>
+
+    <div class="divider"></div>
+
+    <p>I'm going to keep writing about AI and productivity, including tutorials for the specific automations I've built. If this resonated with you, share it with someone who's still doing everything manually. They'll thank you. 🩷</p>
+
+  </div>
+
+  <!-- SPANISH VERSION (hidden by default) -->
+  <div class="article-body" id="article-es" style="display:none">
+
+    <p>Seré honesta contigo. Hace un par de años, era esa persona que trabajaba jornadas de 10 horas, ahogada en tareas repetitivas, preguntándome cómo algunas personas conseguían hacer el doble en la mitad de tiempo. Entonces llegó la IA, no de forma dramática, no de la noche a la mañana, sino poco a poco y de manera práctica.</p>
+
+    <p>Soy data scientist. Trabajo con modelos, pipelines y código a diario. Pero las herramientas de IA que cambiaron mi <em>vida</em> no fueron los papers de investigación más avanzados. Fueron las simples y accesibles que cualquiera puede empezar a usar hoy. De eso trata este post.</p>
+
+    <div class="callout">
+      <div class="callout-label">💡 La Gran Idea</div>
+      <p>La IA no está aquí para reemplazarte. Está aquí para quitarte las partes aburridas y que puedas enfocarte en lo que realmente importa, lo creativo, lo estratégico, lo humano.</p>
+    </div>
+
+    <h2>El Cambio que lo Transformó Todo</h2>
+
+    <p>Antes perdía mucho tiempo en cosas que parecían productivas pero no lo eran: escribir el mismo tipo de email una y otra vez, resumir informes largos, buscar cómo escribir una fórmula que había escrito cien veces. Pequeñas cosas, pero que sumaban horas cada semana.</p>
+
+    <p>El momento en que empecé a pensar en la IA como un <strong>compañero de pensamiento</strong>, no como un botón mágico, todo cambió. La palabra clave es "compañero." Tú aportas el contexto, el juicio y el objetivo. La IA aporta la velocidad, las opciones y los borradores. Juntos, avanzas más rápido de lo que ninguno podría solo.</p>
+
+    <h2>Mi Kit de IA Diario</h2>
+
+    <p>Estas son las herramientas que realmente uso, explicadas de forma sencilla:</p>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">🧠</div>
+        <div class="tool-name">Claude / ChatGPT</div>
+        <div class="tool-badge">Uso Diario</div>
+      </div>
+      <div class="tool-desc">Mi compañero de pensamiento principal. Lo uso para redactar emails e informes, hacer brainstorming, explicar temas complejos de forma sencilla, revisar mis textos y responder preguntas antes de perderme buscando.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">⚡</div>
+        <div class="tool-name">n8n</div>
+        <div class="tool-badge">Automatización</div>
+      </div>
+      <div class="tool-desc">El que más horas me ahorra. n8n te permite conectar aplicaciones y automatizar flujos de trabajo de forma visual, sin necesidad de programar en profundidad. He automatizado respuestas de WhatsApp, seguimiento de inventario e informes semanales. Una vez que corre, corre para siempre.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">📝</div>
+        <div class="tool-name">Notion AI</div>
+        <div class="tool-badge">Organización</div>
+      </div>
+      <div class="tool-desc">Ideal para resumir notas de reuniones, generar puntos de acción de documentos largos y rellenar plantillas. Lo uso para convertir apuntes caóticos en planes de proyecto estructurados.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">🎨</div>
+        <div class="tool-name">Midjourney / DALL·E</div>
+        <div class="tool-badge">Creatividad</div>
+      </div>
+      <div class="tool-desc">Para visuales, presentaciones y contenido de redes sociales. En lugar de pasar una hora buscando la foto de stock "correcta", describo lo que quiero y tengo algo personalizado en 30 segundos.</div>
+    </div>
+
+    <h2>Ejemplos Reales de Mi Semana</h2>
+
+    <p>Quiero ser concreta. Así apareció la IA en mi trabajo <em>solo esta semana</em>:</p>
+
+    <p><strong>Lunes:</strong> Tenía un informe de 45 páginas de proveedor que leer antes de una reunión. Pegué las secciones clave en Claude y pregunté: "¿Cuáles son los tres puntos más importantes y qué preguntas debería hacer?" La preparación terminó en 10 minutos en lugar de una hora.</p>
+
+    <p><strong>Martes:</strong> Necesitaba enviar un email de seguimiento a un cliente pero no sabía cómo formular cierto feedback difícil de forma diplomática. Escribí lo que quería decir en bruto y le pedí a Claude que lo hiciera "constructivo y profesional sin perder el mensaje clave." Primer borrador listo, edición ligera, enviado.</p>
+
+    <p><strong>Jueves:</strong> Mi flujo automatizado de n8n para informes de inventario corrió solo, recopiló los datos y envió un resumen al equipo. Yo no hice nada. Simplemente ocurrió.</p>
+
+    <div class="callout">
+      <div class="callout-label">⏱ Estimación de tiempo ahorrado</div>
+      <p>Solo con estos tres ejemplos: aproximadamente 4–5 horas recuperadas. Cada semana. Son más de 200 horas al año, tiempo que ahora dedico a trabajo más profundo, a aprender, o simplemente a no quemarme.</p>
+    </div>
+
+    <h2>Cómo Empezar Hoy (3 Pasos)</h2>
+
+    <ol class="steps">
+      <li><strong>Elige una tarea que repites cada semana</strong>, puede ser escribir un update de estado, resumir un documento, o buscar algo. Ese es tu primer objetivo.</li>
+      <li><strong>Pruébalo con un asistente de IA gratuito</strong>, Claude y ChatGPT tienen versiones gratuitas. No te compliques con el prompt. Háblale como lo harías con un colega inteligente. Describe lo que necesitas y cuál es el contexto.</li>
+      <li><strong>Observa qué pasó</strong>, ¿Fue más rápido? ¿Liberó tiempo? ¿El resultado necesitaba edición? Ese bucle de retroalimentación es cómo mejoras usando la IA de forma efectiva.</li>
+    </ol>
+
+    <p>Eso es todo. Empieza con una tarea. El kit crece de forma natural a medida que avanzas.</p>
+
+    <h2>Lo que la IA No Puede Reemplazar</h2>
+
+    <p>Quiero ser clara en algo: la IA es una herramienta, no un reemplazo para el juicio, las relaciones o la creatividad. Te da opciones, tú eliges. Hace borradores, tú decides. Automatiza lo rutinario, tú gestionas los matices.</p>
+
+    <p>Las personas que prosperarán en la próxima década no son las que evitan la IA ni las que confían en ella ciegamente. Son las que saben <strong>cuándo usarla, cómo guiarla y cuándo dejarla de lado</strong>. Esa habilidad, saber dónde el juicio humano es irremplazable, vale más que cualquier herramienta.</p>
+
+    <div class="divider"></div>
+
+    <p>Seguiré escribiendo sobre IA y productividad, incluyendo tutoriales de las automatizaciones específicas que he construido. Si esto resonó contigo, compártelo con alguien que todavía lo hace todo manualmente. Te lo agradecerán. 🩷</p>
+
+  </div>
+</div>
+
+<!-- POST FOOTER -->
+<div class="post-footer">
+  <div class="post-footer-inner">
+    <div class="share-title" data-k="share.title">Share this post</div>
+    <div class="share-btns">
+      <a class="share-btn share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=https://moongamboa.github.io/lissett-portfolio/blog/ai-for-productivity.html" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a class="share-btn share-tw" href="https://twitter.com/intent/tweet?text=AI+for+Productivity+by+@lissettgamboa&url=https://moongamboa.github.io/lissett-portfolio/blog/ai-for-productivity.html" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </a>
+    </div>
+
+    <div class="author-card">
+      <img src="https://moongamboa.github.io/lissett-portfolio/profile.jpg" alt="Lissett Gamboa Luna">
+      <div>
+        <div class="author-card-name">Lissett Gamboa Luna</div>
+        <div class="author-card-bio" data-k="author.bio">Data Scientist & AI Enthusiast with 6+ years of experience turning data into impact. I write about AI, automation, data science, and productivity, for everyone, not just techies.</div>
+        <div class="author-card-links">
+          <a href="https://www.linkedin.com/in/lissett-gamboa-luna-290a26271/" target="_blank">LinkedIn →</a>
+          <a href="https://github.com/moongamboa" target="_blank">GitHub →</a>
+          <a href="../index.html">Portfolio →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="more-posts-title" data-k="more.title">More Posts</div>
+    <div class="more-coming">
+      <strong data-k="more.soon">🚀 Coming soon</strong>
+      <p data-k="more.sub">Tutorials on n8n automations, AI agents, and data science for everyone.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const T = {
+  en: {
+    'nav.back': '← Back to site',
+    'post.cat': '✨ Productivity & AI',
+    'post.title': 'AI for Productivity:<br><span class="grad">Work Smarter, Not Harder</span>',
+    'post.subtitle': "You don't need to be a data scientist to use AI. Here's exactly how I use it every day, and how you can start today.",
+    'post.date': 'June 2025',
+    'post.read': '7 min read',
+    'share.title': 'Share this post',
+    'author.bio': 'Data Scientist & AI Enthusiast with 6+ years of experience turning data into impact. I write about AI, automation, data science, and productivity, for everyone, not just techies.',
+    'more.title': 'More Posts',
+    'more.soon': '🚀 Coming soon',
+    'more.sub': 'Tutorials on n8n automations, AI agents, and data science for everyone.',
+  },
+  es: {
+    'nav.back': '← Volver al sitio',
+    'post.cat': '✨ Productividad & IA',
+    'post.title': 'IA para la Productividad:<br><span class="grad">Trabaja Mejor, No Más</span>',
+    'post.subtitle': 'No necesitas ser data scientist para usar IA. Así es exactamente cómo la uso cada día, y cómo tú puedes empezar hoy.',
+    'post.date': 'Junio 2025',
+    'post.read': '7 min de lectura',
+    'share.title': 'Comparte este post',
+    'author.bio': 'Data Scientist y Entusiasta de IA con 6+ años de experiencia convirtiendo datos en impacto. Escribo sobre IA, automatización, data science y productividad, para todos, no solo para techies.',
+    'more.title': 'Más Posts',
+    'more.soon': '🚀 Próximamente',
+    'more.sub': 'Tutoriales de automatizaciones con n8n, agentes de IA y data science para todos.',
+  }
+};
+
+let lang = 'en';
+
+function applyLang(l) {
+  lang = l;
+  const t = T[l];
+  document.querySelectorAll('[data-k]').forEach(el => {
+    const k = el.getAttribute('data-k');
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  document.getElementById('langBtn').textContent = l === 'en' ? 'ES' : 'EN';
+  document.documentElement.lang = l;
+  document.getElementById('article-en').style.display = l === 'en' ? 'block' : 'none';
+  document.getElementById('article-es').style.display = l === 'es' ? 'block' : 'none';
+}
+
+document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'en' ? 'es' : 'en'));
+
+// Reading progress bar
+window.addEventListener('scroll', () => {
+  const article = document.querySelector('.article-wrap');
+  const rect = article.getBoundingClientRect();
+  const total = article.offsetHeight - window.innerHeight;
+  const scrolled = Math.max(0, -rect.top);
+  const pct = Math.min(100, (scrolled / total) * 100);
+  document.getElementById('progress').style.width = pct + '%';
+});
+</script>
+</body>
+</html>

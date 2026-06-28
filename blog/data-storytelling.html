@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Present Data to Non-Technical People, Lissett Gamboa Luna</title>
+  <meta name="description" content="The most underrated skill in data science, and the one that has made the biggest difference in my career. A personal guide from 6 years in the field.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #C2185B;
+      --pink-2: #D81B60;
+      --pink-glow: rgba(194,24,91,0.25);
+      --pink-pale: #FCE4EC;
+      --dark: #0C0C18;
+      --dark-2: #161625;
+      --gray: #6B7280;
+      --gray-light: #F5F6FA;
+      --white: #FFFFFF;
+      --text: #1F2937;
+      --border: #E5E7EB;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; color:var(--text); background:var(--white); overflow-x:hidden; }
+
+    /* NAV */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:999;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.9rem 6%;
+      background:rgba(12,12,24,0.92);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(194,24,91,0.12);
+    }
+    .nav-logo { font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:800; color:#fff; text-decoration:none; }
+    .nav-logo em { color:var(--pink); font-style:normal; }
+    .nav-right { display:flex; align-items:center; gap:1.5rem; }
+    .back-link { color:rgba(255,255,255,.65); text-decoration:none; font-size:.85rem; font-weight:500; transition:color .25s; }
+    .back-link:hover { color:var(--pink); }
+    .lang-btn { background:transparent; border:1.5px solid var(--pink); color:var(--pink); padding:.3rem .85rem; border-radius:20px; cursor:pointer; font-size:.78rem; font-weight:700; font-family:'Inter',sans-serif; transition:all .25s; }
+    .lang-btn:hover { background:var(--pink); color:#fff; }
+
+    /* PROGRESS */
+    .progress-bar { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, var(--pink), var(--pink-2)); z-index:1001; width:0; transition:width .1s linear; }
+
+    /* HERO */
+    .post-hero {
+      background:var(--dark); padding:120px 6% 80px;
+      position:relative; overflow:hidden;
+    }
+    .post-hero::before {
+      content:''; position:absolute; top:-120px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(circle, rgba(194,24,91,.13), transparent 65%);
+      border-radius:50%; pointer-events:none;
+    }
+    .post-hero::after {
+      content:''; position:absolute; bottom:-80px; left:10%;
+      width:300px; height:300px;
+      background:radial-gradient(circle, rgba(216,27,96,.07), transparent 65%);
+      border-radius:50%; pointer-events:none;
+    }
+    .post-hero-inner { position:relative; z-index:1; max-width:760px; }
+    .post-cat {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:rgba(194,24,91,.12); border:1px solid rgba(194,24,91,.3);
+      color:#F48FB1; padding:.35rem 1rem; border-radius:50px;
+      font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      margin-bottom:1.5rem;
+    }
+    .post-title {
+      font-family:'Space Grotesk',sans-serif;
+      font-size:clamp(2rem,5vw,3.2rem); font-weight:800;
+      color:#fff; line-height:1.1; margin-bottom:1.25rem; letter-spacing:-1px;
+    }
+    .post-title .grad {
+      background:linear-gradient(135deg, var(--pink), #F06292);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .post-subtitle { font-size:1.05rem; color:rgba(255,255,255,.5); line-height:1.75; margin-bottom:2rem; max-width:600px; }
+    .post-meta { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    .post-author { display:flex; align-items:center; gap:.75rem; }
+    .post-author img { width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid var(--pink); }
+    .post-author-name { font-size:.85rem; font-weight:600; color:#fff; }
+    .post-author-role { font-size:.75rem; color:rgba(255,255,255,.4); }
+    .meta-items { display:flex; gap:1.25rem; flex-wrap:wrap; }
+    .meta-item { font-size:.78rem; color:rgba(255,255,255,.4); display:flex; align-items:center; gap:.3rem; }
+
+    /* ARTICLE */
+    .article-wrap { max-width:720px; margin:0 auto; padding:4.5rem 6% 6rem; }
+
+    .article-body { font-family:'Lora',serif; font-size:1.07rem; line-height:1.92; color:#374151; }
+    .article-body p { margin-bottom:1.6rem; }
+    .article-body strong { font-weight:700; color:#111827; }
+    .article-body em { color:var(--gray); font-style:italic; }
+
+    .article-body h2 {
+      font-family:'Space Grotesk',sans-serif; font-size:1.55rem; font-weight:800;
+      color:#111827; margin:3.5rem 0 1rem; letter-spacing:-.5px; line-height:1.2;
+    }
+    .article-body h3 {
+      font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:700;
+      color:#111827; margin:2.25rem 0 .75rem;
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      border-left:3px solid var(--pink); margin:2.5rem 0;
+      padding:.25rem 0 .25rem 1.75rem;
+    }
+    .pull-quote p {
+      font-family:'Lora',serif; font-size:1.2rem; font-style:italic;
+      color:#374151; line-height:1.65; margin:0;
+    }
+
+    /* Callout */
+    .callout {
+      background:var(--pink-pale); border-left:4px solid var(--pink);
+      border-radius:0 12px 12px 0; padding:1.25rem 1.5rem; margin:2.25rem 0;
+      font-family:'Inter',sans-serif;
+    }
+    .callout-label { font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--pink); margin-bottom:.4rem; }
+    .callout p { font-size:.93rem; color:#7B1D3A; margin:0; line-height:1.65; font-family:'Inter',sans-serif; }
+
+    /* Rule cards */
+    .rule-card {
+      background:var(--gray-light); border-radius:16px; padding:1.6rem;
+      margin:1.25rem 0; border:1px solid var(--border); transition:all .3s;
+      font-family:'Inter',sans-serif;
+    }
+    .rule-card:hover { border-color:rgba(194,24,91,.3); box-shadow:0 4px 20px rgba(194,24,91,.07); }
+    .rule-header { display:flex; align-items:center; gap:.85rem; margin-bottom:.75rem; }
+    .rule-num {
+      width:32px; height:32px; flex-shrink:0;
+      background:linear-gradient(135deg, var(--pink), var(--pink-2));
+      color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-family:'Space Grotesk',sans-serif; font-size:.85rem; font-weight:800;
+    }
+    .rule-title { font-size:1rem; font-weight:700; color:#111827; }
+    .rule-desc { font-size:.9rem; color:var(--gray); line-height:1.7; }
+
+    /* Example box */
+    .example-box {
+      background:#fff; border:1px solid var(--border); border-radius:14px;
+      padding:1.5rem; margin:1.5rem 0; font-family:'Inter',sans-serif;
+    }
+    .example-label { font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--gray); margin-bottom:1rem; }
+    .example-row { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+    .example-col-label { font-size:.75rem; font-weight:700; margin-bottom:.5rem; }
+    .bad { color:#B91C1C; }
+    .good { color:#15803D; }
+    .example-text { font-size:.88rem; color:var(--gray); line-height:1.65; background:var(--gray-light); border-radius:10px; padding:1rem; }
+
+    .divider { width:54px; height:3px; background:linear-gradient(90deg, var(--pink), var(--pink-2)); border-radius:3px; margin:3.5rem auto; }
+
+    /* POST FOOTER */
+    .post-footer { background:var(--dark); padding:3.5rem 6%; }
+    .post-footer-inner { max-width:720px; margin:0 auto; }
+    .share-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:1rem; }
+    .share-btns { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:3rem; }
+    .share-btn { display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1.3rem; border-radius:50px; text-decoration:none; font-size:.82rem; font-weight:700; font-family:'Inter',sans-serif; transition:all .3s; }
+    .share-li { background:rgba(10,102,194,.15); color:#5BA8D4; border:1px solid rgba(10,102,194,.3); }
+    .share-li:hover { background:rgba(10,102,194,.3); }
+    .share-tw { background:rgba(29,161,242,.15); color:#7BC8F7; border:1px solid rgba(29,161,242,.3); }
+    .share-tw:hover { background:rgba(29,161,242,.3); }
+    .author-card { background:var(--dark-2); border-radius:20px; padding:2rem; display:flex; gap:1.5rem; align-items:flex-start; border:1px solid rgba(194,24,91,.1); }
+    .author-card img { width:70px; height:70px; border-radius:50%; object-fit:cover; border:2px solid var(--pink); flex-shrink:0; }
+    .author-card-name { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
+    .author-card-bio { font-size:.88rem; color:rgba(255,255,255,.5); line-height:1.65; margin-bottom:.9rem; }
+    .author-card-links { display:flex; gap:.75rem; }
+    .author-card-links a { color:var(--pink); text-decoration:none; font-size:.82rem; font-weight:600; transition:opacity .2s; }
+    .author-card-links a:hover { opacity:.7; }
+    .more-posts-title { font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:700; color:#fff; margin:3rem 0 1.25rem; }
+    .more-coming { background:var(--dark-2); border-radius:16px; padding:2rem; text-align:center; border:2px dashed rgba(194,24,91,.25); }
+    .more-coming p { color:rgba(255,255,255,.4); font-size:.88rem; }
+    .more-coming strong { color:var(--pink); display:block; margin-bottom:.4rem; font-size:.95rem; }
+
+    @media(max-width:680px) {
+      .post-hero { padding:100px 5% 60px; }
+      .article-wrap { padding:3rem 5% 5rem; }
+      .post-footer { padding:3rem 5%; }
+      .author-card { flex-direction:column; }
+      .example-row { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">LG<em>.</em></a>
+  <div class="nav-right">
+    <a href="../index.html#blog" class="back-link" data-k="nav.back">← Back to site</a>
+    <button class="lang-btn" id="langBtn">ES</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="post-hero">
+  <div class="post-hero-inner">
+    <div class="post-cat" data-k="post.cat">📊 Data Science & Career</div>
+    <h1 class="post-title" data-k="post.title">How to Present Data<br>to <span class="grad">Non-Technical People</span></h1>
+    <p class="post-subtitle" data-k="post.subtitle">The most underrated skill in data science, and the one that has made the biggest difference in my career. After 6 years, here's what I've learned.</p>
+    <div class="post-meta">
+      <div class="post-author">
+        <img src="https://moongamboa.github.io/lissett-portfolio/profile.jpg" alt="Lissett Gamboa Luna">
+        <div>
+          <div class="post-author-name">Lissett Gamboa Luna</div>
+          <div class="post-author-role">Data Scientist · Indicia Worldwide, UK (Remote)</div>
+        </div>
+      </div>
+      <div class="meta-items">
+        <div class="meta-item">📅 <span data-k="post.date">June 2025</span></div>
+        <div class="meta-item">⏱ <span data-k="post.read">8 min read</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE EN -->
+<div class="article-wrap">
+<div class="article-body" id="art-en">
+
+<p>Early in my career, I built a model I was genuinely proud of. The accuracy was solid, the code was clean, and the business problem it solved was real. I walked into the meeting room ready to show it off, and within five minutes, I had completely lost the room.</p>
+
+<p>The CFO glanced at a confusion matrix on slide three and said, quietly: <em>"What does this mean for us?"</em> I launched into an explanation of precision and recall. She nodded politely and checked her phone.</p>
+
+<p>That was the day I understood something no data science bootcamp teaches you: <strong>a brilliant model nobody understands is worth nothing.</strong></p>
+
+<div class="pull-quote">
+  <p>"Your job isn't to show what you know. Your job is to help them decide."</p>
+</div>
+
+<h2>Why This Skill Gets Ignored</h2>
+
+<p>Data science education, whether it's a master's program, an online course, or a bootcamp, is almost entirely focused on the technical side. How to build models. How to clean data. How to write efficient SQL. These things matter enormously. But they're only half the job.</p>
+
+<p>The other half is communication. And most data scientists, especially early on, treat it as an afterthought: something that happens after the "real" work is done.</p>
+
+<p>The problem is that decisions don't come from models. They come from people. And people need to understand and trust what you're showing them before they act on it. That trust is built through clarity, not complexity.</p>
+
+<div class="callout">
+  <div class="callout-label">📍 From my experience</div>
+  <p>In six years across three countries and multiple industries, the analysts who moved fastest weren't always the most technically skilled. They were the ones who could explain what the data meant, to a logistics director, a marketing VP, or a CEO who had 10 minutes and zero patience for acronyms.</p>
+</div>
+
+<h2>The 3 Rules I Follow Every Time</h2>
+
+<div class="rule-card">
+  <div class="rule-header">
+    <div class="rule-num">1</div>
+    <div class="rule-title">Lead with the insight, not the methodology</div>
+  </div>
+  <div class="rule-desc">Nobody in the boardroom cares how you built the model. They care what it means for their business. Start with the conclusion. "Sales in Q3 will likely drop 12% in the southern region unless we act." Then, if they want to know how you got there, they'll ask. Most of the time, they won't, because they already have what they need to decide.</div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-header">
+    <div class="rule-num">2</div>
+    <div class="rule-title">Replace jargon with analogies</div>
+  </div>
+  <div class="rule-desc">Every technical concept has a real-world equivalent. A "training/test split" is like studying for an exam and then taking it on new questions. A "clustering algorithm" is like organizing a messy drawer by grouping similar items together. Find the analogy, use it, and watch comprehension go from 20% to 100% instantly.</div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-header">
+    <div class="rule-num">3</div>
+    <div class="rule-title">One chart. One message. One decision.</div>
+  </div>
+  <div class="rule-desc">A slide with six charts and a data table is not information, it's anxiety. For every visualization you show, ask yourself: "What is the single thing I want them to walk away knowing from this?" If you can't answer that in one sentence, the slide isn't ready. Cut until it speaks for itself.</div>
+</div>
+
+<h2>Real Examples From My Work</h2>
+
+<p>Let me show you what this looks like in practice, using situations I've actually been in.</p>
+
+<div class="example-box">
+  <div class="example-label">Example 1, Predictive model for sales volume</div>
+  <div class="example-row">
+    <div>
+      <div class="example-col-label bad">❌ What I used to say</div>
+      <div class="example-text">"The model achieved an RMSE of 1,840 units with a MAPE of 7.2% on the test set. We used a gradient boosting regressor with 200 estimators and a learning rate of 0.05."</div>
+    </div>
+    <div>
+      <div class="example-col-label good">✅ What I say now</div>
+      <div class="example-text">"We can now predict next month's sales within ±7%. That means you can order stock with confidence instead of guessing, and avoid the €40,000 in overstock we saw last quarter."</div>
+    </div>
+  </div>
+</div>
+
+<div class="example-box">
+  <div class="example-label">Example 2, Product harmonization process</div>
+  <div class="example-row">
+    <div>
+      <div class="example-col-label bad">❌ Before</div>
+      <div class="example-text">"We applied a clustering algorithm with cosine similarity on the product attribute vectors to group SKUs by technical specification proximity."</div>
+    </div>
+    <div>
+      <div class="example-col-label good">✅ After</div>
+      <div class="example-text">"The system automatically finds products that are essentially the same thing sold under different names or codes. That's how we spotted €200,000 in duplicate spend last year."</div>
+    </div>
+  </div>
+</div>
+
+<h2>The Mindset Shift: You're a Translator</h2>
+
+<p>The best reframe I ever had was this: your job is not to report what the data says. Your job is to <strong>translate between two worlds</strong>, the world of data and the world of business decisions.</p>
+
+<p>Data people speak in models, metrics, and distributions. Business people speak in risk, opportunity, and money. Your role is to carry the meaning across that gap, accurately, without losing anything important, and in a language the other side actually speaks.</p>
+
+<p>That's not a lesser skill than building the model. In many ways, it's harder. And it's the one that makes your work actually matter.</p>
+
+<div class="callout">
+  <div class="callout-label">💡 A question worth asking yourself</div>
+  <p>After your next presentation, ask one person in the room: "What are you going to do differently based on what I showed you?" If they can't answer, the communication didn't land, regardless of how good the analysis was.</p>
+</div>
+
+<h2>How to Get Better at This</h2>
+
+<p>Like most skills, this one improves with deliberate practice. Three things that have helped me most:</p>
+
+<p><strong>Explain your work to someone outside your field.</strong> A family member, a friend who works in a completely different industry. If they get it, you've succeeded. If their eyes glaze over, go back and simplify. This is one of the most brutally honest feedback loops you can create.</p>
+
+<p><strong>Study great communicators, not just great analysts.</strong> Watch how good journalists explain complex topics. Pay attention to how a doctor explains a diagnosis to a patient. Notice what they do: they lead with what matters to you, they use your language, they connect the information to a decision or action you can take.</p>
+
+<p><strong>Before every presentation, write one sentence.</strong> "After this meeting, I want [name] to understand [X] and decide [Y]." If you can't write that sentence before you start building your slides, you're not ready to build your slides.</p>
+
+<div class="divider"></div>
+
+<p>Six years in, this is still the skill I work on most. It doesn't get old, because every audience is different, every business problem is different, and the gap between data and decision never fully closes, it just gets more navigable.</p>
+
+<p>If this resonated, share it with a fellow analyst who's still hiding behind their dashboards. The data is only half the story. 🩷</p>
+
+</div>
+
+<!-- SPANISH VERSION -->
+<div class="article-body" id="art-es" style="display:none">
+
+<p>Al principio de mi carrera, construí un modelo del que estaba genuinamente orgullosa. La precisión era sólida, el código estaba limpio y el problema de negocio que resolvía era real. Entré a la sala de reuniones lista para presentarlo, y en cinco minutos había perdido completamente a la audiencia.</p>
+
+<p>La directora financiera miró una matriz de confusión en la tercera diapositiva y dijo, en voz baja: <em>"¿Qué significa esto para nosotros?"</em> Me lancé a explicar precisión y recall. Asintió con cortesía y miró su teléfono.</p>
+
+<p>Ese fue el día que entendí algo que ningún programa de data science te enseña: <strong>un modelo brillante que nadie entiende no vale nada.</strong></p>
+
+<div class="pull-quote">
+  <p>"Tu trabajo no es mostrar lo que sabes. Tu trabajo es ayudarles a decidir."</p>
+</div>
+
+<h2>Por Qué Esta Habilidad Se Ignora</h2>
+
+<p>La formación en data science, ya sea un máster, un curso online o un bootcamp, está casi completamente enfocada en el lado técnico. Cómo construir modelos. Cómo limpiar datos. Cómo escribir SQL eficiente. Estas cosas importan enormemente. Pero son solo la mitad del trabajo.</p>
+
+<p>La otra mitad es la comunicación. Y la mayoría de los data scientists, especialmente al principio, la tratan como algo secundario: algo que ocurre después de que el "trabajo real" está hecho.</p>
+
+<p>El problema es que las decisiones no vienen de los modelos. Vienen de las personas. Y las personas necesitan entender y confiar en lo que les estás mostrando antes de actuar. Esa confianza se construye con claridad, no con complejidad.</p>
+
+<div class="callout">
+  <div class="callout-label">📍 Desde mi experiencia</div>
+  <p>En seis años, en tres países y múltiples industrias, los analistas que avanzaron más rápido no siempre eran los más habilidosos técnicamente. Eran los que podían explicar qué significaban los datos, a un director de logística, a una VP de marketing o a un CEO con 10 minutos y cero paciencia para las siglas.</p>
+</div>
+
+<h2>Las 3 Reglas que Sigo Siempre</h2>
+
+<div class="rule-card">
+  <div class="rule-header">
+    <div class="rule-num">1</div>
+    <div class="rule-title">Empieza por el insight, no por la metodología</div>
+  </div>
+  <div class="rule-desc">A nadie en el comité le importa cómo construiste el modelo. Les importa qué significa para su negocio. Empieza con la conclusión. "Las ventas del Q3 probablemente caerán un 12% en la región sur si no actuamos." Luego, si quieren saber cómo llegaste a eso, preguntarán. La mayoría de las veces no lo harán, porque ya tienen lo que necesitan para decidir.</div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-header">
+    <div class="rule-num">2</div>
+    <div class="rule-title">Reemplaza la jerga por analogías</div>
+  </div>
+  <div class="rule-desc">Todo concepto técnico tiene un equivalente en la vida real. Un "train/test split" es como estudiar para un examen y luego hacerlo con preguntas nuevas. Un "algoritmo de clustering" es como ordenar un cajón desordenado agrupando objetos similares. Encuentra la analogía, úsala, y verás cómo la comprensión pasa del 20% al 100% instantáneamente.</div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-header">
+    <div class="rule-num">3</div>
+    <div class="rule-title">Un gráfico. Un mensaje. Una decisión.</div>
+  </div>
+  <div class="rule-desc">Una diapositiva con seis gráficos y una tabla de datos no es información, es ansiedad. Por cada visualización que muestres, pregúntate: "¿Qué es lo único que quiero que se lleven de esto?" Si no puedes responderlo en una frase, la diapositiva no está lista. Recorta hasta que hable por sí sola.</div>
+</div>
+
+<h2>Ejemplos Reales de Mi Trabajo</h2>
+
+<p>Déjame mostrarte cómo se ve esto en la práctica, con situaciones en las que realmente he estado.</p>
+
+<div class="example-box">
+  <div class="example-label">Ejemplo 1, Modelo predictivo de volumen de ventas</div>
+  <div class="example-row">
+    <div>
+      <div class="example-col-label bad">❌ Lo que decía antes</div>
+      <div class="example-text">"El modelo logró un RMSE de 1.840 unidades con un MAPE del 7,2% en el test set. Usamos un gradient boosting regressor con 200 estimadores y un learning rate de 0,05."</div>
+    </div>
+    <div>
+      <div class="example-col-label good">✅ Lo que digo ahora</div>
+      <div class="example-text">"Ahora podemos predecir las ventas del mes siguiente con un margen de ±7%. Eso significa que pueden pedir stock con confianza en lugar de adivinar, y evitar los 40.000€ en sobrestock que vimos el trimestre pasado."</div>
+    </div>
+  </div>
+</div>
+
+<div class="example-box">
+  <div class="example-label">Ejemplo 2, Proceso de armonización de productos</div>
+  <div class="example-row">
+    <div>
+      <div class="example-col-label bad">❌ Antes</div>
+      <div class="example-text">"Aplicamos un algoritmo de clustering con similitud coseno sobre los vectores de atributos de producto para agrupar SKUs por proximidad de especificación técnica."</div>
+    </div>
+    <div>
+      <div class="example-col-label good">✅ Después</div>
+      <div class="example-text">"El sistema identifica automáticamente productos que son esencialmente lo mismo vendido con distintos nombres o códigos. Así detectamos 200.000€ en gasto duplicado el año pasado."</div>
+    </div>
+  </div>
+</div>
+
+<h2>El Cambio de Mentalidad: Eres una Traductora</h2>
+
+<p>El mejor reencuadre que tuve fue este: tu trabajo no es reportar lo que dicen los datos. Tu trabajo es <strong>traducir entre dos mundos</strong>, el mundo de los datos y el mundo de las decisiones de negocio.</p>
+
+<p>Los data scientists hablan en modelos, métricas y distribuciones. Los equipos de negocio hablan en riesgo, oportunidad y dinero. Tu rol es llevar el significado a través de esa brecha, con precisión, sin perder nada importante, y en un lenguaje que el otro lado entienda.</p>
+
+<p>Eso no es una habilidad menor que construir el modelo. En muchos sentidos, es más difícil. Y es la que hace que tu trabajo realmente importe.</p>
+
+<div class="callout">
+  <div class="callout-label">💡 Una pregunta que vale la pena hacerse</div>
+  <p>Después de tu próxima presentación, pregúntale a alguien en la sala: "¿Qué vas a hacer diferente en base a lo que te mostré?" Si no pueden responder, la comunicación no funcionó, independientemente de lo bueno que era el análisis.</p>
+</div>
+
+<h2>Cómo Mejorar en Esto</h2>
+
+<p>Como la mayoría de las habilidades, esta mejora con práctica deliberada. Las tres cosas que más me han ayudado:</p>
+
+<p><strong>Explica tu trabajo a alguien fuera de tu campo.</strong> Un familiar, un amigo que trabaja en una industria completamente distinta. Si lo entienden, lo lograste. Si sus ojos se pierden, vuelve y simplifica. Es uno de los bucles de retroalimentación más honestos que puedes crear.</p>
+
+<p><strong>Estudia a grandes comunicadores, no solo a grandes analistas.</strong> Observa cómo los buenos periodistas explican temas complejos. Fíjate en cómo un médico explica un diagnóstico a un paciente. Nota qué hacen: van directo a lo que te importa, usan tu lenguaje, conectan la información con una decisión que puedes tomar.</p>
+
+<p><strong>Antes de cada presentación, escribe una frase.</strong> "Después de esta reunión, quiero que [nombre] entienda [X] y decida [Y]." Si no puedes escribir esa frase antes de empezar a preparar las diapositivas, no estás lista para prepararlas.</p>
+
+<div class="divider"></div>
+
+<p>Seis años después, esta sigue siendo la habilidad en la que más trabajo. No se vuelve obsoleta, porque cada audiencia es diferente, cada problema de negocio es diferente, y la brecha entre datos y decisión nunca se cierra del todo, solo se vuelve más navegable.</p>
+
+<p>Si esto resonó contigo, compártelo con un compañero analista que sigue escondiéndose detrás de sus dashboards. Los datos son solo la mitad de la historia. 🩷</p>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="post-footer">
+  <div class="post-footer-inner">
+    <div class="share-title" data-k="share.title">Share this post</div>
+    <div class="share-btns">
+      <a class="share-btn share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=https://moongamboa.github.io/lissett-portfolio/blog/data-storytelling.html" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a class="share-btn share-tw" href="https://twitter.com/intent/tweet?text=How+to+present+data+to+non-technical+people+by+Lissett+Gamboa&url=https://moongamboa.github.io/lissett-portfolio/blog/data-storytelling.html" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </a>
+    </div>
+
+    <div class="author-card">
+      <img src="https://moongamboa.github.io/lissett-portfolio/profile.jpg" alt="Lissett Gamboa Luna">
+      <div>
+        <div class="author-card-name">Lissett Gamboa Luna</div>
+        <div class="author-card-bio" data-k="author.bio">Data Scientist & AI Enthusiast with 6+ years turning data into impact across Colombia, Spain, and the UK. I write about data science, AI, automation, and the human side of working with data.</div>
+        <div class="author-card-links">
+          <a href="https://www.linkedin.com/in/lissett-gamboa-luna-290a26271/" target="_blank">LinkedIn →</a>
+          <a href="https://github.com/moongamboa" target="_blank">GitHub →</a>
+          <a href="../index.html">Portfolio →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="more-posts-title" data-k="more.title">More Posts</div>
+    <div class="more-coming">
+      <strong data-k="more.soon">🚀 Coming soon</strong>
+      <p data-k="more.sub">n8n tutorials, AI agents, and more data science lessons from the field.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const T = {
+  en: {
+    'nav.back':'← Back to site',
+    'post.cat':'📊 Data Science & Career',
+    'post.title':'How to Present Data<br>to <span class="grad">Non-Technical People</span>',
+    'post.subtitle':'The most underrated skill in data science, and the one that has made the biggest difference in my career. After 6 years, here\'s what I\'ve learned.',
+    'post.date':'June 2025','post.read':'8 min read',
+    'share.title':'Share this post',
+    'author.bio':'Data Scientist & AI Enthusiast with 6+ years turning data into impact across Colombia, Spain, and the UK. I write about data science, AI, automation, and the human side of working with data.',
+    'more.title':'More Posts','more.soon':'🚀 Coming soon',
+    'more.sub':'n8n tutorials, AI agents, and more data science lessons from the field.',
+  },
+  es: {
+    'nav.back':'← Volver al sitio',
+    'post.cat':'📊 Data Science y Carrera',
+    'post.title':'Cómo Presentar Datos<br>a <span class="grad">Personas No Técnicas</span>',
+    'post.subtitle':'La habilidad más infravalorada en data science, y la que más ha marcado la diferencia en mi carrera. Después de 6 años, esto es lo que he aprendido.',
+    'post.date':'Junio 2025','post.read':'8 min de lectura',
+    'share.title':'Comparte este post',
+    'author.bio':'Data Scientist y Entusiasta de IA con 6+ años convirtiendo datos en impacto en Colombia, España y el Reino Unido. Escribo sobre data science, IA, automatización y el lado humano de trabajar con datos.',
+    'more.title':'Más Posts','more.soon':'🚀 Próximamente',
+    'more.sub':'Tutoriales de n8n, agentes de IA y más lecciones de data science desde el campo.',
+  }
+};
+
+let lang = 'en';
+function applyLang(l) {
+  lang = l;
+  const t = T[l];
+  document.querySelectorAll('[data-k]').forEach(el => {
+    const k = el.getAttribute('data-k');
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  document.getElementById('langBtn').textContent = l === 'en' ? 'ES' : 'EN';
+  document.documentElement.lang = l;
+  document.getElementById('art-en').style.display = l === 'en' ? 'block' : 'none';
+  document.getElementById('art-es').style.display = l === 'es' ? 'block' : 'none';
+}
+document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'en' ? 'es' : 'en'));
+
+window.addEventListener('scroll', () => {
+  const wrap = document.querySelector('.article-wrap');
+  if (!wrap) return;
+  const rect = wrap.getBoundingClientRect();
+  const total = wrap.offsetHeight - window.innerHeight;
+  const pct = Math.min(100, Math.max(0, (-rect.top / total) * 100));
+  document.getElementById('progress').style.width = pct + '%';
+});
+</script>
+</body>
+</html>
